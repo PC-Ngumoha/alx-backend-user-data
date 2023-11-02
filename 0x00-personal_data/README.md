@@ -10,6 +10,16 @@
 - Unlike _PII_ which tends to lack a standard definition, _Personal Data_ according to the EU's _GDPR_ or _General Data Protection Rules_ is defined as:
   > Any information relating to an identified or identifiable natural person. An identifiable natural person in this context being defined as one who can be identified directly or indirectly in reference to a standard identifier such as name, identification number, location data e.t.c
 
+- _Logging_ is a better way to display information about the output from our programs. Logging in Python can be implemented through the use of the _logging_ python package. 
+
+- _Logging Levels_ are used to tell the logging mechanism what type of information we wish to display. These levels are as listed below:
+  + DEBUG,
+  + INFO
+  + WARNING
+  + ERROR
+  + CRITICAL
+  By default, the default logging level is set to _WARNING_
+
 
 ## Useful Links
 
