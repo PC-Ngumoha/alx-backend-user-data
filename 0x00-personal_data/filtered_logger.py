@@ -9,8 +9,10 @@ from typing import List
 import re
 
 
-def filter_datum(fields: List[str], red: str, msg: str, sep: str) -> str:
-    """filter_datum method"""
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, seperator: str) -> str:
+    """ filter_datum() function performs filtering """
     for field in fields:
-        msg = re.sub(f'({field})=.*?{sep}', f'\\1={red}{sep}', msg)
-    return msg
+        message = re.sub(f'({field})=(.*?){seperator}',
+                         f'\\1={redaction}{seperator}', message)
+    return message
