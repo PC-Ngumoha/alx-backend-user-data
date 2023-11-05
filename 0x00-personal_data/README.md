@@ -30,3 +30,5 @@
 - [logging python package official python documentation](https://docs.python.org/3/library/logging.html)
 
 - [PII (Personally Identifiable Information) - Tutorial](https://piwik.pro/blog/what-is-pii-personal-data/)
+
+- [Uncovering Password Habits (Article)](https://www.digitalguardian.com/blog/uncovering-password-habits-are-users-password-security-habits-improving-infographic)
