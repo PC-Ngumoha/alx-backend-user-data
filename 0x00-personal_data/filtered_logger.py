@@ -9,8 +9,7 @@ from typing import List
 import logging
 import re
 
-# email,phone,ssn,password,ip,
-PII_FIELDS = ('email', 'phone', 'ssn', 'password', 'ip')
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 class RedactingFormatter(logging.Formatter):
