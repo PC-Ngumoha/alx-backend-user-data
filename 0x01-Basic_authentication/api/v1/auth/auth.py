@@ -14,12 +14,12 @@ class Auth:
         """ require_auth() method
         """
         return False
-    
+
     def authorization_header(self, request: Request = None) -> str:
         """authorization_header() method
         """
         return None
-    
+
     def current_user(self, request: Request = None) -> TypeVar('User'):
         """current_user() method
         """
