@@ -3,7 +3,7 @@
 api/v1/auth.py
 contains the Auth class which handles all authentication on the app.
 """
-from flask import request, Request
+from flask import request
 from typing import List, TypeVar
 
 
@@ -15,12 +15,12 @@ class Auth:
         """
         return False
 
-    def authorization_header(self, request: Request = None) -> str:
+    def authorization_header(self, request=None) -> str:
         """authorization_header() method
         """
         return None
 
-    def current_user(self, request: Request = None) -> TypeVar('User'):
+    def current_user(self, request=None) -> TypeVar('User'):
         """current_user() method
         """
         return None
