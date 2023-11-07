@@ -1,42 +1,42 @@
-# Basic Authentication
+# Simple API
 
-## Useful Points
+Simple HTTP API for playing with `User` model.
 
-- REST APIs need to be able to authenticate clients that make requests to them in a way that the API can remain stateless. For this reason (i.e _Statelessness_), The regular _Session Storage_ is not really helpful as an authentication mechanism for REST APIs as it requires the client and server to be _Stateful_ and keep track of the state of their previous interactions.
 
-- With that in mind, here are some of the mechanisms used for authentication in REST APIs:
+## Files
 
-  + **Basic Access Authentication:** This is the most simple of all the available mechanisms. In this, we are simply sending the _username_ and _password_ for the authenticating client every single time we try to access the server. However, there is a small nuance to this. Instead of sending this username and password in the body of out HTTP request as we would have, we send it in the request header. Before we can send it we first need to format the username and password in the following way:
+### `models/`
 
-    ```
-    <username>:<password>
-    ```
-  and then, we encode it using Base64 encoding and then we send it using the `Authorization` HTTP header with the Base64 encoded username and password as a basic `Bearer` token that can then be accessed on the server where it accesses the `Authorization` header, decodes the Base64 encoded value and then checks to see if a user with said username and password already exists, if so, it authenticates the user. This mechanism is not a secure method as anyone can access this header and decode it, so we always need to use this over HTTPS.
+- `base.py`: base of all models of the API - handle serialization to file
+- `user.py`: user model
 
-    * The Advantages:
-        - It's simple to implement
-        - Enables a stateless server
-        - Supported by all browsers
+### `api/v1`
 
-    * The Disadvantages:
-        - Requires HTTPS to be secure enough for use
-        - Subject to replay attacks (which is a type of attack in which an attacker gets hold of a request and sends it over and over to the server for the purpose of accessing the server. In this case, this will prove extremely effective because the username and password is being sent with every request to the server.)
-        - Very tricky to implement a _LogOut_ mechanism.
+- `app.py`: entry point of the API
+- `views/index.py`: basic endpoints of the API: `/status` and `/stats`
+- `views/users.py`: all users endpoints
 
-  + **Digest Access Authentication:** Read more about it [here](https://en.wikipedia.org/wiki/Digest_access_authentication)
 
-  + **Asymmetric Cryptography:** Read more about it [here](https://en.wikipedia.org/wiki/Public-key_cryptography)
+## Setup
 
-  + **OAuth:** Read more about it [here](https://en.wikipedia.org/wiki/OAuth)
+```
+$ pip3 install -r requirements.txt
+```
 
-  + **JSON Web Tokens (JWT):** Read more about it [here](https://en.wikipedia.org/wiki/JSON_Web_Token)
 
-## Useful Links
+## Run
 
-- [REST API Authentication Mechanisms (Youtube Video)](https://www.youtube.com/watch?v=501dpx2IjGY)
+```
+$ API_HOST=0.0.0.0 API_PORT=5000 python3 -m api.v1.app
+```
 
-- [Python base64 package](https://docs.python.org/3.7/library/base64.html)
 
-- [HTTP Header Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)
+## Routes
 
-- [Base64 (Wikipedia Article)](https://en.wikipedia.org/wiki/Base64)
+- `GET /api/v1/status`: returns the status of the API
+- `GET /api/v1/stats`: returns some stats of the API
+- `GET /api/v1/users`: returns the list of users
+- `GET /api/v1/users/:id`: returns an user based on the ID
+- `DELETE /api/v1/users/:id`: deletes an user based on the ID
+- `POST /api/v1/users`: creates a new user (JSON parameters: `email`, `password`, `last_name` (optional) and `first_name` (optional))
+- `PUT /api/v1/users/:id`: updates an user based on the ID (JSON parameters: `last_name` and `first_name`)
