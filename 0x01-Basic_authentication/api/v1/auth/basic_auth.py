@@ -5,6 +5,7 @@ Contains the BasicAuth class which handles authentication through the use
 of the Basic Authentication mechanism for RESTful APIs
 """
 from api.v1.auth.auth import Auth
+from models.base import DATA
 from models.user import User
 from typing import TypeVar
 import base64
@@ -68,7 +69,7 @@ class BasicAuth(Auth):
             return None
         if not user_pwd or type(user_pwd) is not str:
             return None
-        if User.all() == [] or User.search({'email': user_email}) == []:
+        if DATA == {} or User.search({'email': user_email}) == []:
             return None
         user = User.search({'email': user_email})[0]
         if not user.is_valid_password(user_pwd):
