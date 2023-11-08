@@ -6,6 +6,7 @@ of the Basic Authentication mechanism for RESTful APIs
 """
 from api.v1.auth.auth import Auth
 
+
 class BasicAuth(Auth):
     """class BasicAuth
     """
