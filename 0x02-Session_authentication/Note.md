@@ -4,7 +4,7 @@
 
 ## Useful Links
 
-- [REST API Authentication Mechanisms - Session Auth (YOUTUBE)](https://www.youtube.com/watch?v=501dpx2IjGY)
+- [REST API Authentication Mechanisms(YOUTUBE)](https://www.youtube.com/watch?v=501dpx2IjGY)
 
 - [Cookies (M.D.N Documentation)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie)
 
