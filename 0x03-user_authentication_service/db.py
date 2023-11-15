@@ -48,8 +48,7 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """
-        find_user_by().
+        """ Finds a user in the DB using parameters from user
 
         Parameters:
           - kwargs: keyword arguments used to filter the search
@@ -66,3 +65,21 @@ class DB:
         if found_user:
             return found_user
         raise NoResultFound()
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Updates a specific user in DB with ID user_id
+
+        Parameters:
+          - user_id: ID of the user we want to update
+          - kwargs: Keyword arguments containing values to use in the update.
+
+        Returns:
+          - None: Nothing
+        """
+        user = self.find_user_by(id=user_id)
+        if user:
+            for key in kwargs:
+                if not hasattr(user, key):
+                    raise ValueError()
+                setattr(user, key, kwargs[key])
+            self._session.commit()
