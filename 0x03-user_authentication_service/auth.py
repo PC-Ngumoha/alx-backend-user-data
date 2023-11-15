@@ -47,11 +47,11 @@ class Auth:
 
     def valid_login(self, email: str, password: str) -> bool:
         """Validates if the user can log in with details provided
-        
+
         Parameters:
           - email: email address provided by user.
           - password: password provided by user
-        
+
         Returns:
           - bool: True / False
         """
