@@ -11,6 +11,10 @@ from typing import Dict
 
 from user import Base, User
 
+# Code to get the available fields in the user
+columns = list(User.__table__.columns)
+user_fields = [column.key for column in columns]
+
 
 class DB:
     """DB class
@@ -58,6 +62,9 @@ class DB:
         Returns:
           - found_user: The user with those details.
         """
+        for field in kwargs:
+            if field not in user_fields:
+                raise InvalidRequestError()
         found_user = self._session.query(User).filter_by(**kwargs).first()
         if not found_user:
             raise NoResultFound()
