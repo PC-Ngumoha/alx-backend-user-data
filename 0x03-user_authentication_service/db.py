@@ -11,10 +11,6 @@ from typing import Dict
 
 from user import Base, User
 
-# Code to get the available fields in the user
-columns = list(User.__table__.columns)
-user_fields = [column.key for column in columns]
-
 
 class DB:
     """DB class
@@ -52,7 +48,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs: Dict) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """
         find_user_by().
 
@@ -62,10 +58,12 @@ class DB:
         Returns:
           - found_user: The user with those details.
         """
-        for field in kwargs:
-            if field not in user_fields:
-                raise InvalidRequestError()
+        columns = list(User.__table__.columns)
+        user_fields = {column.key for column in columns}
+        input_fields = set(kwargs.keys())
+        if not input_fields.issubset(user_fields):
+            raise InvalidRequestError()
         found_user = self._session.query(User).filter_by(**kwargs).first()
-        if not found_user:
-            raise NoResultFound()
-        return found_user
+        if found_user:
+            return found_user
+        raise NoResultFound()
