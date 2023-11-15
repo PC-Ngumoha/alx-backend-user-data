@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-"""
-File: user.py
-
-Purpose: Creates a new SQLAlchemy model named User which creates a SQL table
-named 'users' and provides the definitions for each of the fields in said table
+"""User module
 """
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
