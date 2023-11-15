@@ -2,14 +2,15 @@
 """App Module: Flask App
 """
 from auth import Auth
-from flask import Flask, jsonify, request, abort, make_response
+from flask import Flask, jsonify, request, abort, make_response, redirect, \
+                  url_for
 
 app = Flask(__name__)
 AUTH = Auth()
 
 
 @app.route('/', strict_slashes=False)
-def root_route_handler() -> str:
+def root() -> str:
     """The root route of the API
     """
     return jsonify({'message': 'Bienvenue'})
@@ -49,6 +50,20 @@ def login() -> str:
             }))
             response.set_cookie('session_id', session_id)
             return response
+
+
+@app.route('/sessions', strict_slashes=False, methods=['DELETE'])
+def logout() -> str:
+    """Logs out the user with the current session
+    """
+    if request.method == 'DELETE':
+        session_id = request.cookies.get('session_id')
+        session_user = AUTH.get_user_from_session_id(session_id)
+        if session_user:
+            AUTH.destroy_session(session_user.id)
+            return redirect(url_for('root'))
+        else:
+            abort(403)
 
 
 if __name__ == '__main__':
