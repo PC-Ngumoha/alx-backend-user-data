@@ -4,6 +4,7 @@ api/v1/auth.py
 contains the Auth class which handles all authentication on the app.
 """
 from flask import request
+from os import getenv
 from typing import List, TypeVar
 import fnmatch
 
@@ -40,3 +41,16 @@ class Auth:
         """current_user() method
         """
         return None
+
+    def session_cookie(self, request=None):
+        """Retrieves the value of a cookie passed in a request
+
+        Parameters:
+            - request: Request from which we want to extract the cookie
+
+        Returns:
+            - request.cookies.get(COOKIE NAME)
+        """
+        if request is None:
+            return
+        return request.cookies.get(getenv('SESSION_NAME'))
