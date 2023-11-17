@@ -38,9 +38,8 @@ def handle_auth_before_each_request():
     ]
     if auth:
         if auth.require_auth(request.path, no_auth_paths):
-            if not auth.authorization_header(request):
-                abort(401)
-            if not auth.session_cookie(request):
+            if not auth.authorization_header(request) and\
+                not auth.session_cookie(request):
                 abort(401)
 
             if not auth.current_user(request):
